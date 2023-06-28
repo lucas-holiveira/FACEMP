@@ -1,0 +1,155 @@
+package main;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JDesktopPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Font;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.Point;
+
+public class home extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7557402519542622184L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					home frame = new home();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public home() {
+		setTitle("HOME");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 995, 774);
+
+		JPanel contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JDesktopPane dp = new JDesktopPane();
+		dp.setBounds(0, 0, 1676, 889);
+		contentPane.add(dp);
+		dp.setLayout(null);
+
+		JMenu MenuVotar = new JMenu("VOTAR");
+		MenuVotar.setHorizontalTextPosition(SwingConstants.RIGHT);
+		MenuVotar.setHorizontalAlignment(SwingConstants.CENTER);
+		MenuVotar.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		MenuVotar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				votacao vt = new votacao ();
+				dp.add(vt);
+				vt.setVisible(true);
+			}
+		});
+		
+		JMenu MenuCadastro = new JMenu("CADASTRAR");
+		MenuCadastro.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		MenuCadastro.setIcon(new ImageIcon("C:\\Users\\Lucas\\Pictures\\cadastro.png"));
+		menuBar.add(MenuCadastro);
+		
+		JMenuItem mnItCadastroADM = new JMenuItem("ADM");
+		mnItCadastroADM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastroADM ca = new CadastroADM ();
+		        dp.add(ca);
+		        ca.setVisible(true);
+			}
+		});
+		mnItCadastroADM.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		MenuCadastro.add(mnItCadastroADM);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("ELEIÇÃO");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cadastroEleicao ce = new cadastroEleicao ();
+				dp.add(ce);
+				ce.setVisible(true);
+			}
+		});
+		MenuCadastro.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CANDIDATO");
+		MenuCadastro.add(mntmNewMenuItem_1);
+		MenuVotar.setIcon(new ImageIcon("C:\\Users\\Lucas\\Pictures\\elections.png"));
+		menuBar.add(MenuVotar);
+		
+		JMenu MenuResultados = new JMenu("RESULTADOS");
+		MenuResultados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				resultado rsTb = new resultado ();
+				dp.add(rsTb);
+				rsTb.setVisible(true);
+			}
+		});
+		MenuResultados.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		MenuResultados.setIcon(new ImageIcon("C:\\Users\\Lucas\\Pictures\\check_document_file_internet_report_security_success_icon_127056.png"));
+		menuBar.add(MenuResultados);
+		
+		JMenu MenuGerenciar = new JMenu("GERENCIAR");
+		MenuGerenciar.setIcon(new ImageIcon("C:\\Users\\Lucas\\Pictures\\system-analysis-icon_31863.png"));
+		MenuGerenciar.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		menuBar.add(MenuGerenciar);
+
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+}
