@@ -127,8 +127,7 @@ public class GerenciarEleicao extends JInternalFrame {
 					}
 
 				}
-				
-				
+
 				// fim do action
 
 			}

@@ -14,11 +14,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.bson.Document;
 
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -113,6 +114,8 @@ public class CadastroEleicao extends JInternalFrame {
 						DocumentoEleicao.append("nome", nome);
 						DocumentoEleicao.append("status", status);
 						
+						DocumentoEleicao.append("Eleicaa",
+								new Document().append("nome", nome).append("status", status));
 
 
 						collection.insertOne(DocumentoEleicao);
@@ -121,9 +124,7 @@ public class CadastroEleicao extends JInternalFrame {
 						
 						nomeEleicao.setText("");
 						statusEleicao.setSelectedItem(null);
-	
-						JOptionPane.showMessageDialog(null, "SALVO COM SUCESSO");
-
+					
 					
 				} catch (SQLException | ClassNotFoundException ex) {
 					ex.printStackTrace();

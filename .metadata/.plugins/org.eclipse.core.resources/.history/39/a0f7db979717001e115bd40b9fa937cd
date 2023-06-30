@@ -14,15 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import org.bson.Document;
-
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 public class CadastroEleicao extends JInternalFrame {
 
@@ -31,7 +23,6 @@ public class CadastroEleicao extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 5855250687943659970L;
 	private JTextField nomeEleicao;
-		
 
 	/**
 	 * Launch the application.
@@ -98,32 +89,11 @@ public class CadastroEleicao extends JInternalFrame {
 				
 						ps.executeUpdate();
 					
-						//CONEXAO MONGO DB + INSERIR ELEICAO
-						String nome = nomeEleicao.getText();
-						String status = statusEleicao.getSelectedItem().toString();
+			
+					
 
-						
-						MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-
-						MongoDatabase database = mongoClient.getDatabase("eleicao");
-
-						MongoCollection<Document> collection = database.getCollection("eleicao_status");
-
-						Document DocumentoEleicao = new Document();
-						DocumentoEleicao.append("nome", nome);
-						DocumentoEleicao.append("status", status);
-						
-
-
-						collection.insertOne(DocumentoEleicao);
-
-						mongoClient.close();
-						
-						nomeEleicao.setText("");
-						statusEleicao.setSelectedItem(null);
-	
-						JOptionPane.showMessageDialog(null, "SALVO COM SUCESSO");
-
+					nomeEleicao.setText("");
+					statusEleicao.setSelectedItem(null);
 					
 				} catch (SQLException | ClassNotFoundException ex) {
 					ex.printStackTrace();
