@@ -1,0 +1,10 @@
+package conexao;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+
+public class Connection {
+	DB BaseDados;
+	DBCollection colecao;
+	BasicDBObject doument = new BasicDBObject ();
+}
